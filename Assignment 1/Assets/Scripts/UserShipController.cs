@@ -48,14 +48,21 @@ public class UserShipController : MonoBehaviour {
 			shipRb.MoveRotation (shipRb.rotation + 65 * Time.fixedDeltaTime);
 		*/
 
+		/*
 		if (userInputVertical > 0)
 			shipRb.AddForce (Vector2.right * force);
 		else if (userInputVertical < 0)
 			shipRb.AddForce (Vector2.left * force);
-
-		if (userInputHorizontal > 0)
+		*/
+		if (userInputHorizontal > 0) {
 			shipRb.AddForce (Vector2.down * force);
-		else if (userInputHorizontal < 0)
+			shipRb.MoveRotation (shipRb.rotation - 65 * Time.fixedDeltaTime);
+		}
+			
+		else if (userInputHorizontal < 0){
 			shipRb.AddForce (Vector2.up * force);
+			shipRb.MoveRotation (shipRb.rotation + 65 * Time.fixedDeltaTime);
+		}
+			
 	}
 }
