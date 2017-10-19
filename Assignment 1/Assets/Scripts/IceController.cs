@@ -29,23 +29,27 @@ public class IceController : MonoBehaviour {
 		movePosition = _transform.position;
 		movePosition += new Vector2 (speed, 0);
 
-		if (movePosition.x < endX)
+		if (movePosition.x < endX) {
 			ResetMovePosition ();
+		}
+			
 
 		_transform.position = movePosition;
 	}
 
 	void ResetMovePosition(){
 		movePosition = new Vector2 (startX + Random.Range(0, 10), Random.Range (startY, endY));
+
+		//SpawnerController.RemovePositionInUse (movePosition.y);
+		//movePosition = new Vector2(startX + Random.Range(0, 10), SpawnerController.GetSpawnYPosition ());
+		//SpawnerController.AddPositionInUse (movePosition.y);
+
 		ChangeGameObjectAppearance ();
 	}
 
-	void ChangeGameObjectAppearance(){
+	private void ChangeGameObjectAppearance(){
 		//change the size of the game object
 		float randomScale = (float)(Random.Range(5,16)) * 0.1f;
 		_transform.localScale = new Vector2 (randomScale, randomScale);
-		//_transform.Rotate (0, 0, Random.Range (-15, 16));
-		
-
 	}
 }

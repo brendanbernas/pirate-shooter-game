@@ -51,8 +51,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Animations\explosion.cs" />
+     <Compile Include="Assets\Scripts\CannonBallController.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\GreyShipController.cs" />
      <Compile Include="Assets\Scripts\IceController.cs" />
+     <Compile Include="Assets\Scripts\Life.cs" />
      <Compile Include="Assets\Scripts\OceanController.cs" />
+     <Compile Include="Assets\Scripts\Points.cs" />
+     <Compile Include="Assets\Scripts\RedPirateController.cs" />
+     <Compile Include="Assets\Scripts\UIController.cs" />
+     <Compile Include="Assets\Scripts\UserCannonBallCollision.cs" />
+     <Compile Include="Assets\Scripts\UserCannonBallController.cs" />
      <Compile Include="Assets\Scripts\UserShipCollision.cs" />
      <Compile Include="Assets\Scripts\UserShipController.cs" />
  <Reference Include="UnityEngine.UI">

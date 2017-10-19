@@ -4,21 +4,59 @@ using UnityEngine;
 
 public class UserShipCollision : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	[SerializeField]
+	private GameObject explosion;
+
+	private AudioSource explosionAudio;
+
+	void Start(){
+		explosionAudio = this.gameObject.GetComponent<AudioSource> ();
 	}
 
 	public void OnTriggerEnter2D(Collider2D other){
 		if(other.gameObject.tag.Equals("ice"))
 		{
 			Debug.Log("hit ice");
-			//loss life
+			//lose life
+			TakeDamage(3);
 		}
+		else if(other.gameObject.tag.Equals("RedPirate"))
+		{
+			Debug.Log("Red pirate hit");
+			Instantiate (explosion).GetComponent<Transform> ().position =
+				other.GetComponent<Transform> ().position;
+			//play explosion sound
+			TakeDamage(10);
+
+			other.gameObject.GetComponent<RedPirateController> ().ResetMovePosition ();
+		}
+		else if(other.gameObject.tag.Equals("GreyPirate"))
+		{
+			Debug.Log("Grey pirate hit");
+			Instantiate (explosion).GetComponent<Transform> ().position =
+				other.GetComponent<Transform> ().position;
+			TakeDamage (5);
+			//play explosion sound
+
+			other.gameObject.GetComponent<GreyShipController> ().ResetMovePosition ();
+		}
+		else if(other.gameObject.tag.Equals("cannonball"))
+		{
+			Debug.Log("cannonball hit");
+
+			GameObject smallExplosion = Instantiate (explosion);
+			smallExplosion.GetComponent<Transform> ().position =
+				other.GetComponent<Transform> ().position;
+			smallExplosion.GetComponent<Transform>().localScale = smallExplosion.GetComponent<Transform>().localScale / 2;
+			//play explosion sound
+			Destroy (other.gameObject);
+			TakeDamage (3);
+
+		}
+	}
+
+	private void TakeDamage(int amount){
+		Life.Instance.Amount -= amount;
+		explosionAudio.Play ();
 	}
 }
