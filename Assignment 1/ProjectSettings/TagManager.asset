@@ -9,6 +9,7 @@ TagManager:
   - GreyPirate
   - cannonball
   - UserCannonball
+  - Chest
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,6 @@ public class UserShipCollision : MonoBehaviour {
 	public void OnTriggerEnter2D(Collider2D other){
 		if(other.gameObject.tag.Equals("ice"))
 		{
-			Debug.Log("hit ice");
 			//lose life
 			TakeDamage(3);
 		}
@@ -48,10 +47,14 @@ public class UserShipCollision : MonoBehaviour {
 			smallExplosion.GetComponent<Transform> ().position =
 				other.GetComponent<Transform> ().position;
 			smallExplosion.GetComponent<Transform>().localScale = smallExplosion.GetComponent<Transform>().localScale / 2;
-			//play explosion sound
 			Destroy (other.gameObject);
 			TakeDamage (3);
-
+		}
+		else if(other.gameObject.tag.Equals("Chest")){
+			//play the coin pick up noise
+			other.gameObject.GetComponent<AudioSource> ().Play ();
+			other.gameObject.GetComponent<ChestController> ().ResetMovePosition ();
+			Points.Instance.Amount += 300;
 		}
 	}
 
@@ -59,4 +62,6 @@ public class UserShipCollision : MonoBehaviour {
 		Life.Instance.Amount -= amount;
 		explosionAudio.Play ();
 	}
+
+
 }

@@ -31,28 +31,22 @@ public class GreyShipController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//movePosition = _transform.position;
 		movePosition += new Vector2 (speed, 0);
 
 		if (movePosition.x < endX) {
 			//if it has already shot, it will not shoot again
-			if (hasShot){
-				ResetMovePosition ();
-				return;
+			if (hasShot) {
+				StartCoroutine (WaitAndReset (3f));
+			} else {
+				speed = 0;
+				//start hovering (and shooting)
+				StartCoroutine ("Hover");
 			}
-			speed = 0;
-			//start hovering
-			StartCoroutine ("Hover");
 		}
-			
-
 		_transform.position = movePosition;
 	}
 
 	public void ResetMovePosition(){
-		//should spawn at either startY or endY (the bounds of the game)
-		//generates either 0 or 1
-
 		//must reset the speed to the speed it had before
 		speed = speedBackup;
 		//stopping the hovering
@@ -66,8 +60,8 @@ public class GreyShipController : MonoBehaviour {
 		yield return new WaitForSeconds (0.1f);
 		bool forward = true;
 		int i = 0;
-		//moves back or forth 10 times
-		while (i <= 10) {
+		//moves back/forth 5 times
+		while (i <= 5) {
 			i++;
 			if (forward) {
 				speed = 0.015f;
@@ -79,8 +73,14 @@ public class GreyShipController : MonoBehaviour {
 			}
 			yield return new WaitForSeconds (1f);
 		}
-		speed = -0.3f;
+		//after moving back and forth , it will move back
+		speed = -0.015f;
 		hasShot = true;
+	}
+
+	IEnumerator WaitAndReset(float amount){
+		yield return new WaitForSeconds (amount);
+		ResetMovePosition ();
 	}
 
 	private void ShootCannons(){
