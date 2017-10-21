@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/*
+ * Name:CannonBallController.cs
+ * By: Brendan Bernas
+ * Last Modified By: Brendan Bernas
+ * Date Last Modified: Oct 20, 2017
+ * Program Description: Controls the behaviour of the cannonball GameObjects this script is attached to
+ * Revision History: 1.0
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,20 +27,22 @@ public class CannonBallController : MonoBehaviour {
 	private Transform cannonTransform;
 
 
-	// Use this for initialization
+	//changes position of the GameObject to its spawner
 	void Start () {
-		//calculating trajectory
+		//position it to the same location of the spawner (grey pirate ship)
 		cannonTransform = this.gameObject.GetComponent<Transform>();
 		cannonTransform.position = spawner.GetComponent<Transform> ().position;
 
 	}
 	
-	// Update is called once per frame
+	//moves in direction specified by instatiator (by changing public direction field)
 	void Update () {
 		Vector2 currPos = cannonTransform.position;
+		//if the cannon ball is out of bounds, delete it
 		if (currPos.y >= upperYBound || currPos.y <= lowerYBound)
 			Destroy (this.gameObject);
 		else {
+			//move cannon ball
 			currPos += direction * speed;
 			cannonTransform.position = currPos;
 		}

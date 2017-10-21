@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/*
+ * Name:OceanController.cs
+ * By: Brendan Bernas (modified from MailPilot lab)
+ * Last Modified By: Brendan Bernas
+ * Date Last Modified: Oct 20, 2017
+ * Program Description: Controls behaviour of the background ocean game object that it is attached to
+ * Revision History: 1.0
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,13 +22,14 @@ public class OceanController : MonoBehaviour {
 
 	private Vector2 currentPosition;
 	private Transform _transform;
-	// Use this for initialization
+
+	//gets ocean objects tranform component
 	void Start () {
 		_transform = this.gameObject.GetComponent<Transform>();
 		currentPosition = _transform.position;
 	}
 	
-	// Update is called once per frame
+	//move ocean left
 	void Update () {
 		//get current position and move it left
 		currentPosition = _transform.position;
@@ -33,6 +43,7 @@ public class OceanController : MonoBehaviour {
 		_transform.position = currentPosition;
 	}
 
+	//reset position
 	void ResetCurrentPosition(){
 		currentPosition = new Vector2 (startX, 0);
 	}

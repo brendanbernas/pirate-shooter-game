@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/*
+ * Name:ChestController.cs
+ * By: Brendan Bernas (slightly modified from MailPilot lab)
+ * Last Modified By: Brendan Bernas
+ * Date Last Modified: Oct 20, 2017
+ * Program Description: Controls the behaviour of the chest GameObjects this script is attached to
+ * Revision History: 1.0
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,28 +27,26 @@ public class ChestController : MonoBehaviour {
 	private Transform _transform;
 	private Vector2 movePosition;
 
-	// Use this for initialization
+	//getting attached objects Transform component
 	void Start () {
 		_transform = this.gameObject.GetComponent<Transform> ();
 		ResetMovePosition ();
 	}
 
-	// Update is called once per frame
+	//moving gameObject every frame
 	void Update () {
-		//movePosition = _transform.position;
 		movePosition += new Vector2 (speed, 0);
 
+		//if gameObject out of bounds, reset it
 		if (movePosition.x < endX)
 			ResetMovePosition ();
 
 		_transform.position = movePosition;
 	}
 
+	//resets the position of gameObject back to spawn
+	//can be triggered from other scripts hence public
 	public void ResetMovePosition(){
 		movePosition = new Vector2 (startX + Random.Range(0, 10), Random.Range (startY, endY));
-
-		//SpawnerController.RemovePositionInUse (movePosition.y);
-		//movePosition = new Vector2(startX + Random.Range(0, 10), SpawnerController.GetSpawnYPosition ());
-		//SpawnerController.AddPositionInUse (movePosition.y);
 	}
 }

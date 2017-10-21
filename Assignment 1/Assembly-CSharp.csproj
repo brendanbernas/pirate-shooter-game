@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\CannonBallController.cs" />
      <Compile Include="Assets\Scripts\ChestController.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\GameStartController.cs" />
      <Compile Include="Assets\Scripts\GreyShipController.cs" />
      <Compile Include="Assets\Scripts\IceController.cs" />
      <Compile Include="Assets\Scripts\Life.cs" />
